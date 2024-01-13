@@ -1,5 +1,7 @@
 // Work in progress...
 
+metadata description = 'Create a simple AKS cluster with two app deployments, where one application is deployed with Kubernetes manifests and Bicep Kubernetes provider and the other application is diplayed with Helm chart and AKS run Helm script for Bicep.'
+
 @description('AKS cluster name.')
 param clusterName string = 'aks-dev-ktcu'
 
@@ -28,6 +30,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-02-preview' = {
         count: 1
         vmSize: nodePoolSize
         osType: 'Linux'
+        osSKU: 'AzureLinux'
         mode: 'System'
       }
       {
@@ -35,6 +38,7 @@ resource aks 'Microsoft.ContainerService/managedClusters@2023-07-02-preview' = {
         count: 1
         vmSize: nodePoolSize
         osType: 'Linux'
+        osSKU: 'AzureLinux'
         mode: 'User'
       }
     ]
